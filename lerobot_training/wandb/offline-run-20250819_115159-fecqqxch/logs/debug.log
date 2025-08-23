@@ -1,0 +1,23 @@
+2025-08-19 11:51:59,940 INFO    MainThread:2744049 [wandb_setup.py:_flush():80] Current SDK version is 0.21.1
+2025-08-19 11:51:59,940 INFO    MainThread:2744049 [wandb_setup.py:_flush():80] Configure stats pid to 2744049
+2025-08-19 11:51:59,940 INFO    MainThread:2744049 [wandb_setup.py:_flush():80] Loading settings from /data4/hydeng/.config/wandb/settings
+2025-08-19 11:51:59,940 INFO    MainThread:2744049 [wandb_setup.py:_flush():80] Loading settings from /data4/hydeng/nora/lerobot_training/wandb/settings
+2025-08-19 11:51:59,940 INFO    MainThread:2744049 [wandb_setup.py:_flush():80] Loading settings from environment variables
+2025-08-19 11:51:59,940 INFO    MainThread:2744049 [wandb_init.py:setup_run_log_directory():703] Logging user logs to /data4/hydeng/nora/lerobot_training/wandb/offline-run-20250819_115159-fecqqxch/logs/debug.log
+2025-08-19 11:51:59,940 INFO    MainThread:2744049 [wandb_init.py:setup_run_log_directory():704] Logging internal logs to /data4/hydeng/nora/lerobot_training/wandb/offline-run-20250819_115159-fecqqxch/logs/debug-internal.log
+2025-08-19 11:51:59,940 INFO    MainThread:2744049 [wandb_init.py:init():830] calling init triggers
+2025-08-19 11:51:59,940 INFO    MainThread:2744049 [wandb_init.py:init():835] wandb.init called with sweep_config: {}
+config: {'_wandb': {}}
+2025-08-19 11:51:59,940 INFO    MainThread:2744049 [wandb_init.py:init():871] starting backend
+2025-08-19 11:52:00,146 INFO    MainThread:2744049 [wandb_init.py:init():874] sending inform_init request
+2025-08-19 11:52:00,150 INFO    MainThread:2744049 [wandb_init.py:init():882] backend started and connected
+2025-08-19 11:52:00,151 INFO    MainThread:2744049 [wandb_init.py:init():953] updated telemetry
+2025-08-19 11:52:00,154 INFO    MainThread:2744049 [wandb_init.py:init():977] communicating run to backend with 90.0 second timeout
+2025-08-19 11:52:00,314 INFO    MainThread:2744049 [wandb_init.py:init():1029] starting run threads in backend
+2025-08-19 11:52:00,465 INFO    MainThread:2744049 [wandb_run.py:_console_start():2494] atexit reg
+2025-08-19 11:52:00,465 INFO    MainThread:2744049 [wandb_run.py:_redirect():2342] redirect: wrap_raw
+2025-08-19 11:52:00,465 INFO    MainThread:2744049 [wandb_run.py:_redirect():2411] Wrapping output streams.
+2025-08-19 11:52:00,465 INFO    MainThread:2744049 [wandb_run.py:_redirect():2434] Redirects installed.
+2025-08-19 11:52:00,466 INFO    MainThread:2744049 [wandb_init.py:init():1075] run started, returning control to user process
+2025-08-19 11:52:00,467 INFO    MainThread:2744049 [wandb_run.py:_config_callback():1380] config_cb None None {'per_device_batch_size': 16, 'learning_rate': 5e-05, 'gradient_accumulation_steps': 1, 'num_warmup_steps': 1000, 'max_train_steps': 60000, 'output_dir': './nora_finetune_object', 'pretrained_model_dir': '/data4/hydeng/nora/lerobot_training/nora-long/models--declare-lab--nora-long/snapshots/7b0ed6b05a8668638b25a9b33088798c8648464c', 'resume_from_checkpoint': None, 'fast_local_model_path': '/data4/hydeng/nora/lerobot_training/fast', 'load_model_weights': None, 'lerobot_dataset_repo_id': 'xuanyuanj/so101_v3', 'lerobot_dataset_root': '/data4/hydeng/nora/lerobot_so101_v3', 'wandb_project_name': 'Nora VLA with LeRobotDataset', 'checkpoint_save_frequency': 20000, 'logging_frequency': 100, 'gradient_clipping': None, 'invert_grippler_action': True, 'image_key': 'observation.images.front', 'action_key': 'action', 'task_key': 'task'}
+2025-08-19 11:52:04,322 INFO    MsgRouterThr:2744049 [mailbox.py:close():129] [no run ID] Closing mailbox, abandoning 0 handles.

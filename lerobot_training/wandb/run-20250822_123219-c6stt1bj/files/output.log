@@ -1,0 +1,52 @@
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.50, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:03<00:00,  1.51s/it]
+Some kwargs in processor config are unused and will not have any effect: action_dim, time_horizon, min_token, scale, vocab_size.
+Resolving data files: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████| 29/29 [00:00<00:00, 48172.20it/s]
+08/22/2025 12:32:26 - WARNING - __main__ - The dataset's action stats indicate that the gripper action is already in the range [0, 1].  You are training with invert_grippler_action = True. Inverting gripper action may not be necessary.
+08/22/2025 12:32:28 - INFO - __main__ - ***** Running training *****
+08/22/2025 12:32:28 - INFO - __main__ -   Num examples = 2866
+08/22/2025 12:32:28 - INFO - __main__ -   Num steps = 60000
+08/22/2025 12:32:28 - INFO - __main__ -   Instantaneous batch size per device = 16
+08/22/2025 12:32:28 - INFO - __main__ -   Total train batch size = 64
+08/22/2025 12:32:28 - INFO - __main__ -   Gradient Accumulation steps = 1
+08/22/2025 12:32:28 - INFO - __main__ -   Total optimization steps = 60000
+  0%|                                                                                                                          | 1/60000 [00:03<61:17:18,  3.68s/it]Traceback (most recent call last):
+  File "/data4/hydeng/nora/lerobot_training/lerobot_training.py", line 375, in <module>
+    main()
+  File "/data4/hydeng/nora/lerobot_training/lerobot_training.py", line 372, in main
+    train(config)
+  File "/data4/hydeng/nora/lerobot_training/lerobot_training.py", line 333, in train
+    optimizer.step()
+  File "/data4/hydeng/anaconda3/envs/nora_lerobot/lib/python3.10/site-packages/accelerate/optimizer.py", line 178, in step
+    self.optimizer.step(closure)
+  File "/data4/hydeng/anaconda3/envs/nora_lerobot/lib/python3.10/site-packages/torch/optim/lr_scheduler.py", line 140, in wrapper
+    return func.__get__(opt, opt.__class__)(*args, **kwargs)
+  File "/data4/hydeng/anaconda3/envs/nora_lerobot/lib/python3.10/site-packages/torch/optim/optimizer.py", line 493, in wrapper
+    out = func(*args, **kwargs)
+  File "/data4/hydeng/anaconda3/envs/nora_lerobot/lib/python3.10/site-packages/torch/optim/optimizer.py", line 91, in _use_grad
+    ret = func(self, *args, **kwargs)
+  File "/data4/hydeng/anaconda3/envs/nora_lerobot/lib/python3.10/site-packages/torch/optim/adamw.py", line 232, in step
+    has_complex = self._init_group(
+  File "/data4/hydeng/anaconda3/envs/nora_lerobot/lib/python3.10/site-packages/torch/optim/adamw.py", line 175, in _init_group
+    state["exp_avg_sq"] = torch.zeros_like(
+KeyboardInterrupt
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/data4/hydeng/nora/lerobot_training/lerobot_training.py", line 375, in <module>
+[rank0]:     main()
+[rank0]:   File "/data4/hydeng/nora/lerobot_training/lerobot_training.py", line 372, in main
+[rank0]:     train(config)
+[rank0]:   File "/data4/hydeng/nora/lerobot_training/lerobot_training.py", line 333, in train
+[rank0]:     optimizer.step()
+[rank0]:   File "/data4/hydeng/anaconda3/envs/nora_lerobot/lib/python3.10/site-packages/accelerate/optimizer.py", line 178, in step
+[rank0]:     self.optimizer.step(closure)
+[rank0]:   File "/data4/hydeng/anaconda3/envs/nora_lerobot/lib/python3.10/site-packages/torch/optim/lr_scheduler.py", line 140, in wrapper
+[rank0]:     return func.__get__(opt, opt.__class__)(*args, **kwargs)
+[rank0]:   File "/data4/hydeng/anaconda3/envs/nora_lerobot/lib/python3.10/site-packages/torch/optim/optimizer.py", line 493, in wrapper
+[rank0]:     out = func(*args, **kwargs)
+[rank0]:   File "/data4/hydeng/anaconda3/envs/nora_lerobot/lib/python3.10/site-packages/torch/optim/optimizer.py", line 91, in _use_grad
+[rank0]:     ret = func(self, *args, **kwargs)
+[rank0]:   File "/data4/hydeng/anaconda3/envs/nora_lerobot/lib/python3.10/site-packages/torch/optim/adamw.py", line 232, in step
+[rank0]:     has_complex = self._init_group(
+[rank0]:   File "/data4/hydeng/anaconda3/envs/nora_lerobot/lib/python3.10/site-packages/torch/optim/adamw.py", line 175, in _init_group
+[rank0]:     state["exp_avg_sq"] = torch.zeros_like(
+[rank0]: KeyboardInterrupt

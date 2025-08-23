@@ -1,0 +1,32 @@
+2025-08-22 12:30:29,359 INFO    MainThread:1428015 [wandb_setup.py:_flush():80] Current SDK version is 0.21.1
+2025-08-22 12:30:29,359 INFO    MainThread:1428015 [wandb_setup.py:_flush():80] Configure stats pid to 1428015
+2025-08-22 12:30:29,359 INFO    MainThread:1428015 [wandb_setup.py:_flush():80] Loading settings from /data4/hydeng/.config/wandb/settings
+2025-08-22 12:30:29,359 INFO    MainThread:1428015 [wandb_setup.py:_flush():80] Loading settings from /data4/hydeng/nora/lerobot_training/wandb/settings
+2025-08-22 12:30:29,359 INFO    MainThread:1428015 [wandb_setup.py:_flush():80] Loading settings from environment variables
+2025-08-22 12:30:29,359 INFO    MainThread:1428015 [wandb_init.py:setup_run_log_directory():703] Logging user logs to /data4/hydeng/nora/lerobot_training/wandb/run-20250822_123029-m3d4xhax/logs/debug.log
+2025-08-22 12:30:29,359 INFO    MainThread:1428015 [wandb_init.py:setup_run_log_directory():704] Logging internal logs to /data4/hydeng/nora/lerobot_training/wandb/run-20250822_123029-m3d4xhax/logs/debug-internal.log
+2025-08-22 12:30:29,359 INFO    MainThread:1428015 [wandb_init.py:init():830] calling init triggers
+2025-08-22 12:30:29,359 INFO    MainThread:1428015 [wandb_init.py:init():835] wandb.init called with sweep_config: {}
+config: {'_wandb': {}}
+2025-08-22 12:30:29,359 INFO    MainThread:1428015 [wandb_init.py:init():871] starting backend
+2025-08-22 12:30:29,569 INFO    MainThread:1428015 [wandb_init.py:init():874] sending inform_init request
+2025-08-22 12:30:29,577 INFO    MainThread:1428015 [wandb_init.py:init():882] backend started and connected
+2025-08-22 12:30:29,579 INFO    MainThread:1428015 [wandb_init.py:init():953] updated telemetry
+2025-08-22 12:30:29,586 INFO    MainThread:1428015 [wandb_init.py:init():977] communicating run to backend with 90.0 second timeout
+2025-08-22 12:30:55,799 WARNING MainThread:1428015 [wandb_init.py:init():1585] [no run ID] interrupted
+Traceback (most recent call last):
+  File "/data4/hydeng/anaconda3/envs/nora_lerobot/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 1581, in init
+    return wi.init(run_settings, run_config, run_printer)
+  File "/data4/hydeng/anaconda3/envs/nora_lerobot/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 996, in init
+    result = wait_with_progress(
+  File "/data4/hydeng/anaconda3/envs/nora_lerobot/lib/python3.10/site-packages/wandb/sdk/mailbox/wait_with_progress.py", line 24, in wait_with_progress
+    return wait_all_with_progress(
+  File "/data4/hydeng/anaconda3/envs/nora_lerobot/lib/python3.10/site-packages/wandb/sdk/mailbox/wait_with_progress.py", line 87, in wait_all_with_progress
+    return asyncio_compat.run(progress_loop_with_timeout)
+  File "/data4/hydeng/anaconda3/envs/nora_lerobot/lib/python3.10/site-packages/wandb/sdk/lib/asyncio_compat.py", line 30, in run
+    return future.result()
+  File "/data4/hydeng/anaconda3/envs/nora_lerobot/lib/python3.10/concurrent/futures/_base.py", line 453, in result
+    self._condition.wait(timeout)
+  File "/data4/hydeng/anaconda3/envs/nora_lerobot/lib/python3.10/threading.py", line 320, in wait
+    waiter.acquire()
+KeyboardInterrupt
