@@ -162,3 +162,7 @@ lerobot_training/long_hf_model
 lerobot_training/nora_finetune_pick_up
 lerobot_training/lerobot_training
 lerobot_training/wandb
+inference/so101_combined_sft_5k.safetensors
+inference/data
+inference/meta
+inference/videos
