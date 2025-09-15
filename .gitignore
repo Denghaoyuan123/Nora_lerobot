@@ -151,3 +151,14 @@ lerobot_training/nora_finetune_object
 lerobot_training/nora_finetune_object_1
 lerobot_training/nora-long.zip
 snapshots
+so101_pour_the_tea_ee
+so101_pick_the_cube_ee
+so101_pick_the_cube
+so101_pour_the_tea
+outputs
+lerobot_training/hf_model_40000
+lerobot_training/hf_model_40000*
+lerobot_training/long_hf_model
+lerobot_training/nora_finetune_pick_up
+lerobot_training/lerobot_training
+lerobot_training/wandb

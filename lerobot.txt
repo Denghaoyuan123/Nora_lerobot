@@ -1,0 +1,255 @@
+sudo chmod 666 /dev/ttyACM6
+sudo chmod 666 /dev/ttyACM7
+
+
+#校准
+python -m lerobot.calibrate \
+    --robot.type=so101_follower \
+    --robot.port=/dev/ttyACM23 \
+    --robot.id=my_awesome_follower_arm
+    
+python -m lerobot.calibrate \
+    --teleop.type=so101_leader \
+    --teleop.port=/dev/ttyACM0 \
+    --teleop.id=my_awesome_leader_arm
+    
+    
+#控制
+python -m lerobot.teleoperate \
+    --robot.type=so101_follower \
+    --robot.port=/dev/ttyACM1 \
+    --robot.id=my_awesome_follower_arm \
+    --teleop.type=so101_leader \
+    --teleop.port=/dev/ttyACM0 \
+    --teleop.id=my_awesome_leader_arm
+       
+#找port
+python -m lerobot.find_port
+
+
+follower ACM22
+leader ACM23
+
+# find cam
+python -m lerobot.find_cameras opencv
+
+
+front：4  side：10
+
+# 相机 watch
+python -m lerobot.teleoperate \
+  --robot.type=so101_follower \
+  --robot.port=/dev/ttyACM6 \
+  --robot.id=my_awesome_follower_arm \
+  --robot.cameras='{wrist: {type: opencv, index_or_path: /dev/video10, width: 424, height: 240, fps: 15}, front: {type: opencv, index_or_path: /dev/video4, width: 424, height: 240, fps: 15}}' \
+  --teleop.type=so101_leader \
+  --teleop.port=/dev/ttyACM5 \
+  --teleop.id=my_awesome_leader_arm \
+  --display_data=true
+
+
+############################################################################################
+# 相机 record 自己写测（废弃）
+python -m lerobot.record \
+  --robot.type=so101_follower \
+  --robot.port=/dev/ttyACM1 \
+  --robot.id=my_awesome_follower_arm \
+  --robot.cameras='{hand: {type: opencv, index_or_path: /dev/video14, width: 640, height: 480, fps: 30}, front: {type: opencv, index_or_path: /dev/video20, width: 640, height: 480, fps: 30}}' \
+  --teleop.type=so101_leader \
+  --teleop.port=/dev/ttyACM0 \
+  --teleop.id=my_awesome_leader_arm \
+  --output_dir=/home/luka/lerobot_datasets/so101_multi_cam \
+  --display_data=true
+
+
+#Save /home/luka/lerobot_datasets/so101_multi_cam
+camera_front/left/right：三路视频帧
+
+joint_positions.npy：机械臂关节角度
+
+actions.npy：leader 的遥操作输入
+
+timestamps.npy：所有帧时间戳
+
+config.yaml：保存运行配置
+#############################################################################################
+
+# 官方相机 record
+python -m lerobot.record \
+    --robot.type=so101_follower \
+    --robot.port=/dev/ttyACM23 \
+    --robot.id=my_awesome_follower_arm \
+    --robot.cameras='{wrist: {type: opencv, index_or_path: /dev/video10, width: 424, height: 240, fps: 15}, front: {type: opencv, index_or_path: /dev/video4, width: 424, height: 240, fps: 15}}' \
+    --teleop.type=so101_leader \
+    --teleop.port=/dev/ttyACM22 \
+    --teleop.id=my_awesome_leader_arm \
+    --display_data=true \
+    --dataset.repo_id=xuanyuanj/so101_pour_the_tea \
+    --dataset.num_episodes=60 \
+    --dataset.single_task="so101_pour_the_tea" \
+    --dataset.push_to_hub=False \
+    --dataset.episode_time_s=250 \
+    --dataset.reset_time_s=10
+    
+   
+# 重播
+
+
+
+# 训练
+python lerobot/src/lerobot/scripts/train.py \
+  --dataset.repo_id=xuanyuanj/so101_pour_the_tea \
+  --dataset.root=/home/luka/Nora_lerobot/so101_pour_the_tea \
+  --policy.type=smolvla \
+  --policy.repo_id=local/smolvla_so101_pour_the_tea \
+  --policy.push_to_hub=false \
+  --output_dir=outputs/train/smolvla_so101_pour_the_tea \
+  --job_name=smolvla_so101_pour_the_tea \
+  --policy.device=cuda \
+  --wandb.enable=false \
+  --policy.push_to_hub=false
+  
+python lerobot/src/lerobot/scripts/train.py \
+  --dataset.repo_id=xuanyuanj/so101_pour_the_tea \
+  --dataset.root=/home/luka/Nora_lerobot/so101_pour_the_tea \
+  --policy.type=act \
+  --policy.repo_id=local/act_so101_pour_the_tea \
+  --policy.push_to_hub=false \
+  --output_dir=outputs/train/act_so101_pour_the_tea \
+  --job_name=act_so101_pour_the_tea \
+  --policy.device=cuda \
+  --wandb.enable=false \
+  --policy.push_to_hub=false
+  
+python lerobot/src/lerobot/scripts/train.py \
+  --dataset.repo_id=xuanyuanj/so101_pour_the_tea \
+  --dataset.root=/home/luka/Nora_lerobot/so101_pour_the_tea \
+  --policy.type=diffusion \
+  --policy.repo_id=local/diffusion_so101_pour_the_tea \
+  --policy.push_to_hub=false \
+  --output_dir=outputs/train/diffusion_so101_pour_the_tea \
+  --job_name=diffusion_so101_pour_the_tea \
+  --policy.device=cuda \
+  --wandb.enable=false \
+  --policy.push_to_hub=false
+  
+python lerobot/src/lerobot/scripts/train.py \
+  --dataset.repo_id=xuanyuanj/so101_pour_the_tea \
+  --dataset.root=/home/luka/Nora_lerobot/so101_pour_the_tea \
+  --policy.type=pi0 \
+  --policy.repo_id=local/pi0_so101_pour_the_tea \
+  --policy.push_to_hub=false \
+  --output_dir=outputs/train/pi0_so101_pour_the_tea \
+  --job_name=pi0_so101_pour_the_tea \
+  --policy.device=cuda \
+  --wandb.enable=false \
+  --policy.push_to_hub=false
+
+###vqbet & tdmpc 是单相机数据集训练
+python lerobot/src/lerobot/scripts/train.py \
+  --dataset.repo_id=xuanyuanj/so101_pour_the_tea \
+  --dataset.root=/home/luka/Nora_lerobot/so101_pour_the_tea \
+  --policy.type=tdmpc \
+  dataset.image_keys="[observation.images.front]" \
+  --policy.repo_id=local/vqbet_so101_pour_the_tea \
+  --policy.push_to_hub=false \
+  --output_dir=outputs/train/vqbet_so101_pour_the_tea \
+  --job_name=vqbet_so101_pour_the_tea \
+  --policy.device=cuda \
+  --wandb.enable=false \
+  --policy.push_to_hub=false
+
+python lerobot/src/lerobot/scripts/train.py \
+  --policy.path=lerobot/smolvla_base \
+  --policy.repo_id=local/act_so101_v3 \
+  --dataset.root=/home/luka/.cache/huggingface/lerobot/xuanyuanj/so101_v3 \
+  --dataset.repo_id=xuanyuanj/so101_v3 \
+  --batch_size=64 \
+  --steps=20000 \
+  --output_dir=outputs/train/my_smolvla \
+  --job_name=my_smolvla_training \
+  --policy.device=cuda \
+  --wandb.enable=false \
+  --policy.push_to_hub=false
+
+
+# 策略评估    
+python -m lerobot.record  \
+  --robot.type=so101_follower \
+  --robot.port=/dev/ttyACM10 \
+  --robot.cameras='{wrist: {type: opencv, index_or_path: /dev/video10, width: 424, height: 240, fps: 15}, front: {type: opencv, index_or_path: /dev/video4, width: 424, height: 240, fps: 15}}' \
+  --robot.id=my_awesome_follower_arm \
+  --display_data=false \
+  --dataset.repo_id=xuanyuanj/eval_diffusion_so101_pour_the_tea \
+  --dataset.single_task="so101_pour_the_tea" \
+  --dataset.num_episodes=15 \
+  --dataset.episode_time_s=20 \
+  --dataset.reset_time_s=10 \
+  --dataset.push_to_hub=false \
+  --teleop.type=so101_leader \
+  --teleop.port=/dev/ttyACM8 \
+  --teleop.id=my_awesome_leader_arm \
+  --policy.path=/home/luka/lerobot/outputs/train/diffusion_so101_pour_the_tea/checkpoints/020000/pretrained_model
+
+# 找安全动作边界
+python -m lerobot.scripts.find_joint_limits \
+    --robot.type=so101_follower \
+    --robot.port=/dev/ttyACM6 \
+    --robot.id=my_awesome_follower_arm \
+    --teleop.type=so101_leader \
+    --teleop.port=/dev/ttyACM7 \
+    --teleop.id=my_awesome_leader_arm
+
+
+##############################################################################
+nora
+python run_nora_on_robot.py \
+  --model_path /path/to/your/finetuned/nora \
+  --instruction "touch the cube" \
+  --camera_key front wrist \
+  --map_gripper_to_neg1_pos1 \
+  --device cuda:0
+
+
+1.返回机械臂关节读数
+2.返回front图像
+3.send jonint 能够控制 follower 运动
+
+
+
+
+###########################################################################
+NORA
+f 2
+l 5
+ 
+python inference/run_nora_on_robot_jiang_old.py \
+  --robot.port /dev/ttyACM2 \
+  --robot.cameras '{"wrist":{"type":"opencv","index_or_path":"/dev/video10","width":424,"height":240,"fps":15},"front":{"type":"opencv","index_or_path":"/dev/video4","width":424,"height":240,"fps":15}}' \
+  --model_path /home/luka/Nora_lerobot/lerobot_training/hf_model_40000
+
+
+
+
+
+
+  
+  
+  
+  
+new NORA
+python nora_inference_on_robot.py \
+  --model_path /home/luka/Nora_lerobot/lerobot_training/hf_model_40000 \
+  --device cuda:0 --dtype bfloat16 \
+  --robot.type so101_follower \
+  --robot.port /dev/ttyACM23 \
+  --robot.cameras '{wrist: {type: opencv, index_or_path: /dev/video10, width: 424, height: 240, fps: 15}, front: {type: opencv, index_or_path: /dev/video4, width: 424, height: 240, fps: 15}}' \
+  --instruction "pick up the green cube." \
+  --dataset.repo_id xuanyuanj/so101_v3 \
+  --dataset.root /home/luka/Nora_lerobot/so101_pour_the_tea_ee \
+  --fps 15
+
+
+
+
+

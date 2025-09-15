@@ -246,13 +246,15 @@ def train(config: TrainingConfig):
         # metadata = LeRobotDatasetMetadata(config.lerobot_dataset_repo_id)
         metadata = LeRobotDatasetMetadata(repo_id=config.lerobot_dataset_repo_id, root=config.lerobot_dataset_root)
         stats = metadata.stats
-       
+        print(stats['action']['mean'].shape)
+
         if stats['action']['min'][-1]>=0 and config.invert_grippler_action:
             logger.warning("The dataset's action stats indicate that the gripper action is already in the range [0, 1].  You are training with invert_grippler_action = True. Inverting gripper action may not be necessary.")
 
         features = {
                     'action': PolicyFeature(shape=stats['action']['mean'].shape, type='action'),
                 }
+        breakpoint()
         norm_map = {
             'action': NormalizationMode.MIN_MAX,
         }

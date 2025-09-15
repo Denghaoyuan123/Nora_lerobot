@@ -39,3 +39,36 @@ class SO101FollowerConfig(RobotConfig):
 
     # Set to `True` for backward compatibility with previous policies/dataset
     use_degrees: bool = False
+
+
+@RobotConfig.register_subclass("so101_follower_end_effector")    
+@dataclass
+class SO101FollowerEndEffectorConfig(SO101FollowerConfig):
+    """Configuration for the SO101FollowerEndEffector robot."""
+
+    # Path to URDF file for kinematics
+    # NOTE: It is highly recommended to use the urdf in the SO-ARM100 repo:
+    # https://github.com/TheRobotStudio/SO-ARM100/blob/main/Simulation/SO101/so101_new_calib.urdf
+    urdf_path: str | None = None
+
+    # End-effector frame name in the URDF
+    target_frame_name: str = "gripper_frame_link"
+
+    # Default bounds for the end-effector position (in meters)
+    end_effector_bounds: dict[str, list[float]] = field(
+        default_factory=lambda: {
+            "min": [-1.0, -1.0, -1.0],  # min x, y, z
+            "max": [1.0, 1.0, 1.0],  # max x, y, z
+        }
+    )
+
+    max_gripper_pos: float = 2
+    max_joint_step_deg: float = 6
+
+    end_effector_step_sizes: dict[str, float] = field(
+        default_factory=lambda: {
+            "x": 1,
+            "y": 1,
+            "z": 1,
+        }
+    )
